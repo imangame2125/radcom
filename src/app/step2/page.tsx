@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
 type Data = (number | string)[][];
 
@@ -117,4 +117,14 @@ const Step2 = () => {
   );
 };
 
-export default Step2;
+function Step2Page(){
+  return (
+    <Suspense>
+      <Step2/>
+    </Suspense>
+
+  )
+
+}
+
+export default Step2Page;
