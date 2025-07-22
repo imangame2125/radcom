@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/button/Button';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 type Data = (number | string)[][];
 
@@ -35,6 +35,18 @@ const Step2 = () => {
 
   const columns = Array.from({ length: Number(column) });
   const rows = Array.from({ length: Number(row) });
+
+  useEffect(() => {
+    const numRows = Number(row);
+    const numColumns = Number(column);
+
+    const isValidNumber = (val: number) => !isNaN(val) && val >= 3 && val % 2 === 1;
+
+    if (!isValidNumber(numRows) || !isValidNumber(numColumns)) {
+      router.push('/step1');
+      return;
+    }
+  }, [row, column]);
 
   function handleInputChange(rowIndex: number, colIndex: number, value: string) {
     if (isNaN(Number(value))) {
