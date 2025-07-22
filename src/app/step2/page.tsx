@@ -80,8 +80,8 @@ const Step2 = () => {
                   <td className="px-4 py-4 border border-gray-200" key={colIndex}>
                     <input
                       type="text"
-                      className={`text-gray-900 py-2 text-center outline-none border-none bg-white w-3ك rounded-lg shadow-sm ${
-                        isError ? 'border-red-400' : ''
+                      className={`text-gray-900 py-2 text-center outline-none border bg-white w-3ك rounded-lg shadow-sm ${
+                        isError ? 'border-red-400' : 'border-gray-300'
                       } focus:outline-none`}
                       placeholder="عدد وارد فرمایید"
                       value={data[rowIndex]?.[colIndex] || ''}
