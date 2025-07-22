@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 type Data = (number | string)[][];
 
@@ -19,7 +19,7 @@ const Result = () => {
   const rows = Array.from({ length: data.length });
 
   useEffect(() => {
-    const storedData = sessionStorage.getItem("data");
+    const storedData = sessionStorage.getItem('data');
     let finalData = [[]];
     if (storedData) {
       finalData = JSON.parse(storedData);
@@ -37,20 +37,13 @@ const Result = () => {
   }, []);
 
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <table className="w-full border border-gray-300">
-        <thead>
-          <tr>
-            {columns.map((_, index) => (
-              <th key={index}>{index + 1}</th>
-            ))}
-          </tr>
-        </thead>
+    <div className=" flex items-center justify-center flex-col h-[700px]">
+      <table className=" mt-20 border border-gray-300">
         <tbody>
           {rows.map((_, rowIndex) => (
-            <tr key={rowIndex}>
+            <tr className="px-4 py-4 border border-gray-200 text-center" key={rowIndex}>
               {data[rowIndex].map((value, colIndex) => (
-                <td key={colIndex} className="border border-gray-300 p-2">
+                <td key={colIndex} className="px-4 py-4 border border-gray-200">
                   {value}
                 </td>
               ))}

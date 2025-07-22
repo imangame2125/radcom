@@ -1,15 +1,16 @@
-"use client";
+'use client';
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Button } from '@/components/button/Button';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense, useState } from 'react';
 
 type Data = (number | string)[][];
 
 const Step2 = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const row = searchParams.get("row");
-  const column = searchParams.get("column");
+  const row = searchParams.get('row');
+  const column = searchParams.get('column');
 
   function initialArray() {
     if (!row || !column) {
@@ -23,7 +24,7 @@ const Step2 = () => {
 
     const rows = new Array(numRows);
     for (let i = 0; i < numRows; i++) {
-      rows[i] = new Array(numColumns).fill("");
+      rows[i] = new Array(numColumns).fill('');
     }
 
     return rows;
@@ -35,11 +36,7 @@ const Step2 = () => {
   const columns = Array.from({ length: Number(column) });
   const rows = Array.from({ length: Number(row) });
 
-  function handleInputChange(
-    rowIndex: number,
-    colIndex: number,
-    value: string
-  ) {
+  function handleInputChange(rowIndex: number, colIndex: number, value: string) {
     if (isNaN(Number(value))) {
       const newErrors = [...errors];
       newErrors[rowIndex][colIndex] = true;
@@ -56,14 +53,14 @@ const Step2 = () => {
   }
 
   function handleSeeResults() {
-    sessionStorage.setItem("data", JSON.stringify(data));
-    router.push("/result");
+    sessionStorage.setItem('data', JSON.stringify(data));
+    router.push('/result');
   }
 
   let disableButton = false;
   for (let i = 0; i < data.length; i++) {
     for (let j = 0; j < data[i].length; j++) {
-      if (data[i][j] === "" || errors[i][j]) {
+      if (data[i][j] === '' || errors[i][j]) {
         disableButton = true;
         break;
       }
@@ -71,33 +68,24 @@ const Step2 = () => {
   }
 
   return (
-    <div className="">
-      <table className="w-full border border-gray-300">
-        <thead>
-          <tr>
-            {columns.map((col, index) => (
-              <th key={index}>{index + 1}</th>
-            ))}
-          </tr>
-        </thead>
+    <div className=" flex items-center justify-center flex-col h-[700px]">
+      <table className=" mt-20 border border-gray-300">
         <tbody>
           {rows.map((_, rowIndex) => (
-            <tr key={rowIndex}>
+            <tr className="border border-gray-200" key={rowIndex}>
               {columns.map((_, colIndex) => {
                 const isError = errors[rowIndex]?.[colIndex];
 
                 return (
-                  <td key={colIndex}>
+                  <td className="px-4 py-4 border border-gray-200" key={colIndex}>
                     <input
                       type="text"
-                      className={`text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm ${
-                        isError ? "border-red-400" : ""
+                      className={`text-gray-900 py-2 text-center outline-none border-none bg-white w-3ك rounded-lg shadow-sm ${
+                        isError ? 'border-red-400' : ''
                       } focus:outline-none`}
-                      placeholder="Enter a number"
-                      value={data[rowIndex]?.[colIndex] || ""}
-                      onChange={(e) =>
-                        handleInputChange(rowIndex, colIndex, e.target.value)
-                      }
+                      placeholder="عدد وارد کنید"
+                      value={data[rowIndex]?.[colIndex] || ''}
+                      onChange={(e) => handleInputChange(rowIndex, colIndex, e.target.value)}
                     />
                   </td>
                 );
@@ -106,25 +94,23 @@ const Step2 = () => {
           ))}
         </tbody>
       </table>
-      <button
+      <Button
         disabled={disableButton}
         onClick={handleSeeResults}
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="mt-12 px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        See results
-      </button>
+        دیدن نتیجه
+      </Button>
     </div>
   );
 };
 
-function Step2Page(){
+function Step2Page() {
   return (
     <Suspense>
-      <Step2/>
+      <Step2 />
     </Suspense>
-
-  )
-
+  );
 }
 
 export default Step2Page;
