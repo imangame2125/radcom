@@ -83,7 +83,7 @@ const Step2 = () => {
                       className={`text-gray-900 py-2 text-center outline-none border-none bg-white w-3ك rounded-lg shadow-sm ${
                         isError ? 'border-red-400' : ''
                       } focus:outline-none`}
-                      placeholder="عدد وارد کنید"
+                      placeholder="عدد وارد فرمایید"
                       value={data[rowIndex]?.[colIndex] || ''}
                       onChange={(e) => handleInputChange(rowIndex, colIndex, e.target.value)}
                     />
