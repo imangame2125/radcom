@@ -1,10 +1,18 @@
 'use client';
-import { Button } from '@/components/button/Button';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+
+// Components
+import { Button } from '@/components/button/Button';
+
+//Image
 import logo from '../../../public/assets/images/radom-image.svg';
 import backround from '../../../public/assets/images/back-radcom.jpg';
+
+// Utils
+import { isOddAndMinThree } from '@/utils/isOddAndMinThree';
+
 const Step1 = () => {
   const [dimensions, setDimensions] = useState({
     row: 3,
@@ -27,11 +35,7 @@ const Step1 = () => {
 
   const handleChange = (name: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
-    if (isNaN(value) || value < 3 || value % 2 === 0) {
-      setDimensionsError((prev) => ({ ...prev, [name]: true }));
-    } else {
-      setDimensionsError((prev) => ({ ...prev, [name]: false }));
-    }
+    const isValid = isOddAndMinThree(value);
     setDimensions((prev) => ({ ...prev, [name]: value }));
   };
 

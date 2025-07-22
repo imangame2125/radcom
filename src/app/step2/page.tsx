@@ -1,8 +1,10 @@
 'use client';
-
-import { Button } from '@/components/button/Button';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+
+//Components
+import { Button } from '@/components/button/Button';
+import { isOddAndMinThree } from '@/utils/isOddAndMinThree';
 
 type Data = (number | string)[][];
 
@@ -40,9 +42,7 @@ const Step2 = () => {
     const numRows = Number(row);
     const numColumns = Number(column);
 
-    const isValidNumber = (val: number) => !isNaN(val) && val >= 3 && val % 2 === 1;
-
-    if (!isValidNumber(numRows) || !isValidNumber(numColumns)) {
+    if (!isOddAndMinThree(numRows) || !isOddAndMinThree(numColumns)) {
       router.push('/step1');
       return;
     }

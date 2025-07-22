@@ -1,7 +1,11 @@
 'use client';
-import { Button } from '@/components/button/Button';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+
+// Components
+import { Button } from '@/components/button/Button';
+
+// Images
 import logo from '../../public/assets/images/radom-image.svg';
 import background from '../../public/assets/images/first.jpg';
 
